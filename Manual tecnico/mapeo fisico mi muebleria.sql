@@ -1,7 +1,7 @@
 CREATE SCHEMA `mi_muebleria`;
 
 CREATE USER usuarioParaProyecto IDENTIFIED BY '41288320abc';
-GRANT USAGE, INSERT, DELETE, UPDATE, SELECT ON mi_muebleria.* TO usuarioParaProyecto;
+GRANT ALL PRIVILEGES ON mi_muebleria.* TO usuarioParaProyecto;
 
 USE `mi_muebleria`;
 CREATE TABLE `mueble` (
