@@ -76,11 +76,10 @@ public class GestorDePieza {
     }
 
     public String modificarPieza(Pieza pieza, String nombre, String precio) {
-        Connection conexion = Conexion.conectar();
         try {
             int contadorPiezaExistente = 0; //este contador sirve para contar si ya existe una pieza igual a la que vamos a actualizar
-            conexion.setAutoCommit(false); //manejamos transaciones
-            PreparedStatement query1 = conexion.prepareStatement("SELECT * FROM pieza WHERE UPPER(nombre) = UPPER(?) AND precio = ?;"); //esta quey devulve una tabla donde estan las piezas con caracterisicas iguales
+            CONEXION.setAutoCommit(false); //manejamos transaciones
+            PreparedStatement query1 = CONEXION.prepareStatement("SELECT * FROM pieza WHERE UPPER(nombre) = UPPER(?) AND precio = ?;"); //esta quey devulve una tabla donde estan las piezas con caracterisicas iguales
             query1.setString(1, pieza.getNombreDePieza()); //damos valores a las ?
             query1.setDouble(2, pieza.getPrecio());//
             ResultSet resultado = query1.executeQuery();//ejecutamos la query
@@ -88,20 +87,20 @@ public class GestorDePieza {
                 contadorPiezaExistente++; //si entra significa que ya hay una pieza con las caracteristicas
             }
             if (contadorPiezaExistente == 0) { //si esto se cumple entonces no hay piezas iguales
-                PreparedStatement query2 = conexion.prepareStatement( //hacemos una qyery
+                PreparedStatement query2 = CONEXION.prepareStatement( //hacemos una qyery
                         "UPDATE pieza SET nombre = ?, precio = ? WHERE UPPER(nombre) = UPPER(?) AND precio = ?;");
                 query2.setString(1, pieza.getNombreDePieza());//damos valores a los ?
                 query2.setDouble(2, pieza.getPrecio());//
                 query2.setString(3, nombre);//
                 query2.setDouble(4, Double.parseDouble(precio));//
                 query2.executeUpdate();//
-                conexion.commit();//si todo salio bien hacemos el commit
+                CONEXION.commit();//si todo salio bien hacemos el commit
                 return "Se modifico la pieza con exito";//retornamos el exito
             }
             return "No se actualizo la pieza debido a que ya hay una pieza con caracteristicas similares"; //si el igf no se cumple ya hay piezas con valores iguales
         } catch (SQLException ex) {
             try {
-                conexion.rollback();
+                CONEXION.rollback();
             } catch (SQLException ex1) {
             }
             return ex.getMessage();

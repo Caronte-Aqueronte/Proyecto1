@@ -49,8 +49,8 @@ public class TablaPieza extends HttpServlet {
                             + "<td>" + resultado.getDouble("precio") + "</td>"
                             + "<td>" + resultado.getInt("existencias") + "</td>"
                             + "<td> "
-                            + "<a href=\"editar-pieza.jsp?nombre=" + resultado.getString("nombre") + "&precio=" + resultado.getDouble("precio") + "\"><i class='bx bxs-edit' style='color:#2b1da5'  ></i> "
-                            + "<a href=\"eliminar-pieza.jsp?nombre=" + resultado.getString("nombre") + "&precio=" + resultado.getDouble("precio") + "\"><i class='bx bx-trash' style='color:#d52d4c'  ></i> "
+                            + "<a href=\"editar-pieza.jsp?nombre=" + resultado.getString("nombre") + "&precio=" + resultado.getDouble("precio") + "\"><i class='bx bxs-edit' style='color:#2b1da5'  ></i> </a>"
+                            + "<a href=\"eliminar-pieza.jsp?nombre=" + resultado.getString("nombre") + "&precio=" + resultado.getDouble("precio") + "\"><i class='bx bx-trash' style='color:#d52d4c'  ></i></a> "
                             + "</td>"
                             + "</tr>");
                 }
